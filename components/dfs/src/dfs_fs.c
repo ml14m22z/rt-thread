@@ -433,6 +433,7 @@ int dfs_mkfs(const char *fs_name, const char *device_name)
     /* check device name, and it should not be NULL */
     if (device_name != NULL)
         dev_id = rt_device_find(device_name);
+    LOG_I("dfs_mkfs: dev_id=%d", dev_id);
 
     if (dev_id == NULL)
     {
@@ -446,16 +447,18 @@ int dfs_mkfs(const char *fs_name, const char *device_name)
     /* find the file system operations */
     for (index = 0; index < DFS_FILESYSTEM_TYPES_MAX; index ++)
     {
+        LOG_I("dfs_mkfs find the file system operations: filesystem_operation_table[%d]=%s, fs_name=%s", index, filesystem_operation_table[index]->name, fs_name);
         if (filesystem_operation_table[index] != NULL &&
             strcmp(filesystem_operation_table[index]->name, fs_name) == 0)
             break;
     }
     dfs_unlock();
-
+    LOG_I("dfs_mkfs: index=%d, DFS_FILESYSTEM_TYPES_MAX=%d", index, DFS_FILESYSTEM_TYPES_MAX);
     if (index < DFS_FILESYSTEM_TYPES_MAX)
     {
         /* find file system operation */
         const struct dfs_filesystem_ops *ops = filesystem_operation_table[index];
+        LOG_I("dfs_mkfs: ops={name=%s,flags=%d,mkfs=%p}", ops->name, ops->flags, ops->mkfs);
         if (ops->mkfs == NULL)
         {
             LOG_E("The file system (%s) mkfs function was not implement", fs_name);

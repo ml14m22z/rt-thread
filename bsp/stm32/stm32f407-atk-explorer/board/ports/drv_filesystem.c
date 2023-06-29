@@ -49,6 +49,7 @@ static int onboard_sdcard_mount(void)
 static int onboard_spiflash_mount(void)
 {
     struct rt_device *mtd_dev = RT_NULL;
+    int mount_ret;
 
     fal_init();
 
@@ -57,20 +58,24 @@ static int onboard_spiflash_mount(void)
     {
         LOG_E("Can't create a mtd device on '%s' partition.", FS_PARTITION_NAME);
     }
-
-    if (dfs_mount(FS_PARTITION_NAME, "/spiflash", "lfs", 0, 0) == RT_EOK)
+    mount_ret = dfs_mount(FS_PARTITION_NAME, "/spiflash", "elm", 0, 0);
+    if (mount_ret == RT_EOK)
     {
         LOG_I("spi flash mount to '/spiflash'");
     }
     else
     {
-        dfs_mkfs("lfs", FS_PARTITION_NAME);
-        if (dfs_mount(FS_PARTITION_NAME, "/spiflash", "lfs", 0, 0) == RT_EOK)
+        LOG_E("onboard_spiflash_mount mount_ret=%d", mount_ret);
+        LOG_I("onboard_spiflash_mount dfs_mkfs(\"elm\", FS_PARTITION_NAME=%s)", FS_PARTITION_NAME);
+        dfs_mkfs("elm", FS_PARTITION_NAME);
+        mount_ret = dfs_mount(FS_PARTITION_NAME, "/spiflash", "elm", 0, 0);
+        if (mount_ret == RT_EOK)
         {
             LOG_I("spi flash mount to '/spiflash'");
         }
         else
         {
+            LOG_E("onboard_spiflash_mount mount_ret=%d", mount_ret);
             LOG_E("spi flash failed to mount to '/spiflash'");
         }
     }

@@ -116,7 +116,7 @@ int dfs_elm_mount(struct dfs_filesystem *fs, unsigned long rwflag, const void *d
     {
         if (geometry.bytes_per_sector > FF_MAX_SS)
         {
-            rt_kprintf("The sector size of device is greater than the sector size of FAT.\n");
+            rt_kprintf("The sector size of device is greater than the sector size of FAT: %d\n", geometry.bytes_per_sector);
             return -EINVAL;
         }
     }
@@ -203,16 +203,19 @@ int dfs_elm_mkfs(rt_device_t dev_id)
     char logic_nbr[3] = {'0',':', 0};
     MKFS_PARM opt;
 
+    rt_kprintf("dfs_elm_mkfs: formating...\r\n");
     work = rt_malloc(FF_MAX_SS);
     if(RT_NULL == work) {
         return -ENOMEM;
     }
+    rt_kprintf("dfs_elm_mkfs: rt_malloc success\r\n");
 
     if (dev_id == RT_NULL)
     {
         rt_free(work); /* release memory */
         return -EINVAL;
     }
+    rt_kprintf("dfs_elm_mkfs: dev_id not null\r\n");
 
     /* if the device is already mounted, then just do mkfs to the drv,
      * while if it is not mounted yet, then find an empty drive to do mkfs
@@ -220,6 +223,7 @@ int dfs_elm_mkfs(rt_device_t dev_id)
 
     flag = FSM_STATUS_INIT;
     index = get_disk(dev_id);
+    rt_kprintf("dfs_elm_mkfs: get_disk index=%d\r\n", index);
     if (index == -1)
     {
         /* not found the device id */
@@ -282,7 +286,7 @@ int dfs_elm_mkfs(rt_device_t dev_id)
 
     if (result != FR_OK)
     {
-        rt_kprintf("format error, result=%d\n", result);
+        rt_kprintf("dfs_elm_mkfs: format error, result=%d\n", result);
         return elm_result_to_dfs(result);
     }
 

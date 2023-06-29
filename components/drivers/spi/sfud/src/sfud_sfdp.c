@@ -79,7 +79,8 @@ extern void sfud_log_info(const char *format, ...);
  */
 bool sfud_read_sfdp(sfud_flash *flash) {
     SFUD_ASSERT(flash);
-
+    SFUD_INFO("sfud_read_sfdp dump: %s, %d", flash->name, read_sfdp_header(flash));
+        
     /* JEDEC basic flash parameter header */
     sfdp_para_header basic_header;
     if (read_sfdp_header(flash) && read_basic_header(flash, &basic_header)) {
@@ -114,6 +115,9 @@ static bool read_sfdp_header(sfud_flash *flash) {
         SFUD_INFO("Error: Can't read SFDP header.");
         return false;
     }
+    SFUD_INFO("read_sfdp_header: read_sfdp_data: %0X %0X %0X %0X  %0X %0X %0X %0X",\
+                                                 header[0],header[1],header[2],header[3],\
+                                                 header[4],header[5],header[6],header[7]);
     /* check SFDP header */
     if (!(header[0] == 'S' &&
           header[1] == 'F' &&
