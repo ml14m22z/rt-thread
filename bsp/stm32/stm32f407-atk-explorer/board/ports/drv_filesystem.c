@@ -102,6 +102,7 @@ static int filesystem_mount(void)
         LOG_E("rom mount to '/' failed!");
     }
 #ifdef BSP_USING_SDCARD_FATFS
+    rt_thread_mdelay(500);
     onboard_sdcard_mount();
 #endif
 
@@ -111,4 +112,4 @@ static int filesystem_mount(void)
 
     return RT_EOK;
 }
-INIT_APP_EXPORT(filesystem_mount);
+INIT_ENV_EXPORT(filesystem_mount);
