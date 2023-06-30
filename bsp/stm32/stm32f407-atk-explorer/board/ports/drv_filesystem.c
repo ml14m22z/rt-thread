@@ -58,14 +58,14 @@ static int onboard_spiflash_mount(void)
         LOG_E("Can't create a mtd device on '%s' partition.", FS_PARTITION_NAME);
     }
 
-    if (dfs_mount(FS_PARTITION_NAME, "/spiflash", "lfs", 0, 0) == RT_EOK)
+    if (dfs_mount("W25Q128", "/spiflash", "elm", 0, 0) == RT_EOK)
     {
         LOG_I("spi flash mount to '/spiflash'");
     }
     else
     {
-        dfs_mkfs("lfs", FS_PARTITION_NAME);
-        if (dfs_mount(FS_PARTITION_NAME, "/spiflash", "lfs", 0, 0) == RT_EOK)
+        dfs_mkfs("elm", "W25Q128");
+        if (dfs_mount("W25Q128", "/spiflash", "elm", 0, 0) == RT_EOK)
         {
             LOG_I("spi flash mount to '/spiflash'");
         }
