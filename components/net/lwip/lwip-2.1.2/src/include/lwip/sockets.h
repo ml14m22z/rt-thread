@@ -463,6 +463,7 @@ typedef struct ipv6_mreq {
 #endif
 
 /* FD_SET used for lwip_select */
+#include <sys/select.h>
 #ifndef FD_SET
 #undef  FD_SETSIZE
 /* Make FD_SETSIZE match NUM_SOCKETS in socket.c */

@@ -122,11 +122,27 @@ menu "Onboard Peripheral Drivers"
         select RT_LWIP_USING_HW_CHECKSUM
         select RT_USING_POSIX_FS
         select RT_USING_POSIX_SOCKET
+        if BSP_USING_ETH
+            choice
+                prompt "On-board PHY chip"
+                default PHY_USING_DP83848C
 
-    config PHY_USING_LAN8720A
-        bool
-        depends on BSP_USING_ETH
-        default y
+                config PHY_USING_DP83848C
+                    bool "DP83848C"
+
+                config PHY_USING_LAN8720A
+                    bool "LAN8720A"
+
+                config PHY_USING_DM9161CEP
+                    bool "DM9161CEP"
+
+            endchoice
+        endif
+
+    // config PHY_USING_LAN8720A
+    //     bool
+    //     depends on BSP_USING_ETH
+    //     default y
 
     config BSP_USING_MPU6050
         bool "Enable MPU6050 (i2c1)"
