@@ -172,8 +172,8 @@
 
 /* Static IPv4 Address */
 
-#define RT_LWIP_IPADDR "169.254.58.133"
-#define RT_LWIP_GWADDR "169.254.58.132"
+#define RT_LWIP_IPADDR "192.168.1.133"
+#define RT_LWIP_GWADDR "192.168.1.1"
 #define RT_LWIP_MSKADDR "255.255.255.0"
 #define RT_LWIP_UDP
 #define RT_LWIP_TCP
@@ -220,6 +220,15 @@
 
 
 /* Wiced WiFi */
+
+
+/* CYW43012 WiFi */
+
+
+/* BL808 WiFi */
+
+
+/* CYW43439 WiFi */
 
 
 /* IoT Cloud */
