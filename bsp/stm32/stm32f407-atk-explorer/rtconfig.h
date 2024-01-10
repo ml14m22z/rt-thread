@@ -262,6 +262,12 @@
 
 /* samples: kernel and components samples */
 
+#define PKG_USING_NETWORK_SAMPLES
+#define PKG_USING_NETWORK_SAMPLES_LATEST_VERSION
+#define NETWORK_SAMPLES_USING_TCP_CLIENT
+#define NETWORK_SAMPLES_USING_TCP_SERVER
+#define NETWORK_SAMPLES_USING_UDP_CLIENT
+#define NETWORK_SAMPLES_USING_UDP_SERVER
 
 /* entertainment: terminal games and other interesting software packages */
 
