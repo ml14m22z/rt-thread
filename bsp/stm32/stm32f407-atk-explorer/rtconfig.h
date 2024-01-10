@@ -44,7 +44,7 @@
 #define RT_USING_DEVICE
 #define RT_USING_CONSOLE
 #define RT_CONSOLEBUF_SIZE 128
-#define RT_CONSOLE_DEVICE_NAME "uart1"
+#define RT_CONSOLE_DEVICE_NAME "uart3"
 #define RT_VER_NUM 0x50000
 #define RT_USING_HW_ATOMIC
 #define RT_USING_CPU_FFS
@@ -242,13 +242,13 @@
 
 /* Onboard Peripheral Drivers */
 
-#define BSP_USING_USB_TO_USART
+#define BSP_USING_COM3
 
 /* On-chip Peripheral Drivers */
 
 #define BSP_USING_GPIO
 #define BSP_USING_UART
-#define BSP_USING_UART1
+#define BSP_USING_UART3
 #define BSP_USING_I2C2
 #define BSP_I2C2_SCL_PIN 16
 #define BSP_I2C2_SDA_PIN 91
