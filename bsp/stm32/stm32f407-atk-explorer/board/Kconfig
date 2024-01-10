@@ -123,7 +123,7 @@ menu "Onboard Peripheral Drivers"
         select RT_USING_POSIX_FS
         select RT_USING_POSIX_SOCKET
 
-    config PHY_USING_LAN8720A
+    config PHY_USING_DP83848C
         bool
         depends on BSP_USING_ETH
         default y
